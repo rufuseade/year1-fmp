@@ -30,12 +30,12 @@ func _physics_process(_delta):
 		motion.x = SPEED
 		$Sprite.flip_h = false
 		$Sprite2.scale.x = 2
-		_animated_sprite.play("walk_right")
+		_animated_sprite.play("walkright")
 	elif Input.is_action_pressed("left"):
 		motion.x = -SPEED
 		$Sprite.flip_h = true
 		$Sprite2.scale.x = -2
-		_animated_sprite.play("walk_left")
+		_animated_sprite.play("walkleft")
 	else:
 		motion.x = 0
 		_animated_sprite.play("idle")

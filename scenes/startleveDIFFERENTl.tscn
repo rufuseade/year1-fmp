@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=2]
+[gd_scene load_steps=126 format=2]
 
 [ext_resource path="res://light.tscn" type="PackedScene" id=1]
 [ext_resource path="res://campfire.tscn" type="PackedScene" id=2]
@@ -43,6 +43,8 @@
 [ext_resource path="res://assets/caveentrance/waterfallright-export.png" type="Texture" id=41]
 [ext_resource path="res://misc/scenesFade.tres" type="Animation" id=42]
 [ext_resource path="res://assets/Rat Enemy -Sheet-exportsmall.png" type="Texture" id=43]
+[ext_resource path="res://assets/character/walking_right.png" type="Texture" id=44]
+[ext_resource path="res://assets/character/walking_left.png" type="Texture" id=45]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 109.757 )
@@ -134,6 +136,38 @@ region = Rect2( 64, 0, 32, 37 )
 atlas = ExtResource( 38 )
 region = Rect2( 96, 0, 32, 37 )
 
+[sub_resource type="AtlasTexture" id=73]
+atlas = ExtResource( 44 )
+region = Rect2( 0, 0, 32, 37 )
+
+[sub_resource type="AtlasTexture" id=74]
+atlas = ExtResource( 44 )
+region = Rect2( 32, 0, 32, 37 )
+
+[sub_resource type="AtlasTexture" id=75]
+atlas = ExtResource( 44 )
+region = Rect2( 64, 0, 32, 37 )
+
+[sub_resource type="AtlasTexture" id=76]
+atlas = ExtResource( 44 )
+region = Rect2( 96, 0, 32, 37 )
+
+[sub_resource type="AtlasTexture" id=77]
+atlas = ExtResource( 45 )
+region = Rect2( 0, 0, 32, 37 )
+
+[sub_resource type="AtlasTexture" id=78]
+atlas = ExtResource( 45 )
+region = Rect2( 32, 0, 32, 37 )
+
+[sub_resource type="AtlasTexture" id=79]
+atlas = ExtResource( 45 )
+region = Rect2( 64, 0, 32, 37 )
+
+[sub_resource type="AtlasTexture" id=80]
+atlas = ExtResource( 45 )
+region = Rect2( 96, 0, 32, 37 )
+
 [sub_resource type="SpriteFrames" id=21]
 animations = [ {
 "frames": [ ExtResource( 37 ) ],
@@ -150,6 +184,16 @@ animations = [ {
 "loop": true,
 "name": "walk_left",
 "speed": 7.0
+}, {
+"frames": [ SubResource( 73 ), SubResource( 74 ), SubResource( 75 ), SubResource( 76 ) ],
+"loop": true,
+"name": "walkright",
+"speed": 7.0
+}, {
+"frames": [ SubResource( 77 ), SubResource( 78 ), SubResource( 79 ), SubResource( 80 ) ],
+"loop": true,
+"name": "walkleft",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=22]
@@ -712,6 +756,16 @@ region_rect = Rect2( 0, 0, 1024, 256 )
 [node name="CanvasModulate" type="CanvasModulate" parent="ParallaxBackground"]
 color = Color( 0.219608, 0.219608, 0.219608, 1 )
 
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 400.0
+margin_top = -400.0
+margin_right = 900.0
+margin_bottom = 100.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2( 490.084, -35.104 )
 scale = Vector2( 0.6, 0.6 )
@@ -816,7 +870,7 @@ position = Vector2( 1.77586, 0.144699 )
 scale = Vector2( 1.42857, 1 )
 frames = SubResource( 12 )
 animation = "owmen"
-frame = 1
+frame = 3
 playing = true
 
 [node name="KinematicBody2D2" type="KinematicBody2D" parent="."]
@@ -918,13 +972,6 @@ amount = 500
 lifetime = 0.54
 process_material = SubResource( 31 )
 
-[node name="WaterfallLight" type="Light2D" parent="Node2D"]
-visible = false
-position = Vector2( 21.2087, 92.6856 )
-texture = ExtResource( 18 )
-texture_scale = 0.34
-energy = 0.77
-
 [node name="WaterfallCollision" type="Area2D" parent="Node2D"]
 position = Vector2( -35.02, 51.011 )
 
@@ -986,7 +1033,6 @@ shape = SubResource( 58 )
 position = Vector2( 50, -64.82 )
 scale = Vector2( 0.6, 0.6 )
 frames = SubResource( 64 )
-frame = 1
 speed_scale = 0.702
 playing = true
 
@@ -1013,11 +1059,20 @@ __meta__ = {
 [node name="SceneAnim" type="AnimationPlayer" parent="LevelTransition/SceneTransition"]
 anims/scenesFade = ExtResource( 42 )
 
+[node name="WaterfallLight" type="Light2D" parent="."]
+position = Vector2( 373.821, -44.661 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+texture = ExtResource( 18 )
+texture_scale = 0.13
+color = Color( 0.87451, 0.87451, 0.87451, 1 )
+energy = 0.67
+
 [node name="Rat" type="AnimatedSprite" parent="."]
-position = Vector2( -150, -47.5 )
+position = Vector2( 278, -47.5 )
 frames = SubResource( 71 )
 animation = "run"
-frame = 2
+frame = 4
 playing = true
 
 [node name="RatAnim" type="AnimationPlayer" parent="Rat"]
