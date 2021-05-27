@@ -1033,6 +1033,7 @@ shape = SubResource( 58 )
 position = Vector2( 50, -64.82 )
 scale = Vector2( 0.6, 0.6 )
 frames = SubResource( 64 )
+frame = 2
 speed_scale = 0.702
 playing = true
 
@@ -1072,7 +1073,7 @@ energy = 0.67
 position = Vector2( 278, -47.5 )
 frames = SubResource( 71 )
 animation = "run"
-frame = 4
+frame = 1
 playing = true
 
 [node name="RatAnim" type="AnimationPlayer" parent="Rat"]
