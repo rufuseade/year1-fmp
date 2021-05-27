@@ -1,0 +1,1034 @@
+[gd_scene load_steps=116 format=2]
+
+[ext_resource path="res://light.tscn" type="PackedScene" id=1]
+[ext_resource path="res://campfire.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/maincharacter.png" type="Texture" id=3]
+[ext_resource path="res://torch.tscn" type="PackedScene" id=4]
+[ext_resource path="res://fire-particle.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/vegetation.png" type="Texture" id=6]
+[ext_resource path="res://misc/torchparticletexture.tres" type="Texture" id=7]
+[ext_resource path="res://assets/owl_spritesheet.png" type="Texture" id=8]
+[ext_resource path="res://assets/grasstilemap.png" type="Texture" id=9]
+[ext_resource path="res://assets/tree_spruce.png" type="Texture" id=10]
+[ext_resource path="res://assets/level1background/2.png" type="Texture" id=11]
+[ext_resource path="res://assets/shrub.png" type="Texture" id=12]
+[ext_resource path="res://assets/level1background/9.png" type="Texture" id=13]
+[ext_resource path="res://assets/bubblecloud.png" type="Texture" id=14]
+[ext_resource path="res://assets/Old woman-Sheet.png" type="Texture" id=15]
+[ext_resource path="res://assets/caveentrance/cave.png" type="Texture" id=16]
+[ext_resource path="res://assets/character/right.png" type="Texture" id=17]
+[ext_resource path="res://assets/light.png" type="Texture" id=18]
+[ext_resource path="res://assets/level1background/1.png" type="Texture" id=19]
+[ext_resource path="res://assets/level1background/10.png" type="Texture" id=20]
+[ext_resource path="res://assets/Stall.png" type="Texture" id=21]
+[ext_resource path="res://misc/waterfall.tres" type="Material" id=22]
+[ext_resource path="res://assets/junglestart/foreground.png" type="Texture" id=23]
+[ext_resource path="res://assets/level1background/11.png" type="Texture" id=24]
+[ext_resource path="res://assets/level1background/0.png" type="Texture" id=25]
+[ext_resource path="res://assets/level1background/6.png" type="Texture" id=26]
+[ext_resource path="res://assets/twig.png" type="Texture" id=27]
+[ext_resource path="res://assets/level1background/7.png" type="Texture" id=28]
+[ext_resource path="res://misc/vegetationsway.shader" type="Shader" id=29]
+[ext_resource path="res://Light2D.gd" type="Script" id=30]
+[ext_resource path="res://icon.png" type="Texture" id=31]
+[ext_resource path="res://player.gd" type="Script" id=32]
+[ext_resource path="res://assets/caveentrance/waterfallleft.png" type="Texture" id=33]
+[ext_resource path="res://assets/caveentrance/waterfallright.png" type="Texture" id=34]
+[ext_resource path="res://assets/junglestart/background.png" type="Texture" id=35]
+[ext_resource path="res://startleveDIFFERENTl.gd" type="Script" id=36]
+[ext_resource path="res://assets/character/idle.png" type="Texture" id=37]
+[ext_resource path="res://assets/character/left.png" type="Texture" id=38]
+[ext_resource path="res://assets/junglestart/actualforeground.png" type="Texture" id=39]
+[ext_resource path="res://assets/level1background/waterfallspritesheet.png" type="Texture" id=40]
+[ext_resource path="res://assets/caveentrance/waterfallright-export.png" type="Texture" id=41]
+[ext_resource path="res://misc/scenesFade.tres" type="Animation" id=42]
+[ext_resource path="res://assets/Rat Enemy -Sheet-exportsmall.png" type="Texture" id=43]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 109.757 )
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform float amplitude = 2f;
+uniform float speed = 1f;
+
+void vertex(){
+	VERTEX.x += amplitude * sin( (1f-UV.y) * speed * TIME);
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/amplitude = 2.0
+shader_param/speed = 1.0
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 29 )
+shader_param/amplitude = 10.0
+shader_param/speed = 2.0
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 29 )
+shader_param/amplitude = 5.0
+shader_param/speed = 2.0
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 7.80203, 1.67619 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 7.45336, 0.995777 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 15 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 15 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 15 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=12]
+animations = [ {
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"loop": true,
+"name": "owmen",
+"speed": 2.0
+} ]
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 17 )
+region = Rect2( 0, 0, 32, 37 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 17 )
+region = Rect2( 32, 0, 32, 37 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 17 )
+region = Rect2( 64, 0, 32, 37 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 17 )
+region = Rect2( 96, 0, 32, 37 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 38 )
+region = Rect2( 0, 0, 32, 37 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 38 )
+region = Rect2( 32, 0, 32, 37 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 38 )
+region = Rect2( 64, 0, 32, 37 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 38 )
+region = Rect2( 96, 0, 32, 37 )
+
+[sub_resource type="SpriteFrames" id=21]
+animations = [ {
+"frames": [ ExtResource( 37 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"loop": true,
+"name": "walk_right",
+"speed": 7.0
+}, {
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"loop": true,
+"name": "walk_left",
+"speed": 7.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=22]
+extents = Vector2( 9.73475, 29.7809 )
+
+[sub_resource type="Curve" id=23]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.418182 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=24]
+curve = SubResource( 23 )
+
+[sub_resource type="ParticlesMaterial" id=25]
+emission_shape = 1
+emission_sphere_radius = 3.0
+flag_disable_z = true
+spread = 0.0
+gravity = Vector3( 0, -10, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 25.0
+scale = 1.5
+scale_random = 0.37
+scale_curve = SubResource( 24 )
+color_ramp = ExtResource( 7 )
+
+[sub_resource type="ShaderMaterial" id=26]
+shader = ExtResource( 29 )
+shader_param/amplitude = 20.0
+shader_param/speed = 2.0
+
+[sub_resource type="Shader" id=27]
+code = "shader_type canvas_item;
+
+// Gonkee's water shader for Godot 3 - full tutorial https://youtu.be/uhMAHpV_cDg
+// If you use this shader, I would prefer if you gave credit to me and my channel
+
+uniform vec4 blue_tint : hint_color;
+
+uniform vec2 sprite_scale;
+uniform float scale_x = 0.67;
+
+float rand(vec2 coord){
+	return fract(sin(dot(coord, vec2(12.9898, 78.233)))* 43758.5453123);
+}
+
+float noise(vec2 coord){
+	vec2 i = floor(coord);
+	vec2 f = fract(coord);
+
+	// 4 corners of a rectangle surrounding our point
+	float a = rand(i);
+	float b = rand(i + vec2(1.0, 0.0));
+	float c = rand(i + vec2(0.0, 1.0));
+	float d = rand(i + vec2(1.0, 1.0));
+
+	vec2 cubic = f * f * (3.0 - 2.0 * f);
+
+	return mix(a, b, cubic.x) + (c - a) * cubic.y * (1.0 - cubic.x) + (d - b) * cubic.x * cubic.y;
+}
+
+void fragment(){
+	
+	vec2 noisecoord1 = UV * sprite_scale * scale_x;
+	vec2 noisecoord2 = UV * sprite_scale * scale_x + 4.0;
+	
+	vec2 motion1 = vec2(TIME * 0.3, TIME * -0.4);
+	vec2 motion2 = vec2(TIME * 0.1, TIME * 0.5);
+	
+	vec2 distort1 = vec2(noise(noisecoord1 + motion1), noise(noisecoord2 + motion1)) - vec2(0.5);
+	vec2 distort2 = vec2(noise(noisecoord1 + motion2), noise(noisecoord2 + motion2)) - vec2(0.5);
+	
+	vec2 distort_sum = (distort1 + distort2) / 60.0;
+	
+	vec4 color = textureLod(SCREEN_TEXTURE, SCREEN_UV + distort_sum, 0.0);
+	
+	color = mix(color, blue_tint, 0.3);
+	color.rgb = mix(vec3(0.5), color.rgb, 1.4);
+	
+	float near_top = (UV.y + distort_sum.y) / (0.2 / sprite_scale.y);
+	near_top = clamp(near_top, 0.0, 1.0);
+	near_top = 1.0 - near_top;
+	
+	color = mix(color, vec4(1.0), near_top);
+	
+	float edge_lower = 0.6;
+	float edge_upper = edge_lower + 0.1;
+	
+	if(near_top > edge_lower){
+		color.a = 0.0;
+		
+		if(near_top < edge_upper){
+			color.a = (edge_upper - near_top) / (edge_upper - edge_lower);
+		}
+	}
+	
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=28]
+shader = SubResource( 27 )
+shader_param/blue_tint = Color( 0.14902, 0.682353, 0.823529, 1 )
+shader_param/sprite_scale = Vector2( 15, 10 )
+shader_param/scale_x = 1.34
+
+[sub_resource type="Gradient" id=29]
+offsets = PoolRealArray( 0, 0.937984 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.0715065, 0.397949, 0.375953, 1 )
+
+[sub_resource type="GradientTexture" id=30]
+gradient = SubResource( 29 )
+
+[sub_resource type="ParticlesMaterial" id=31]
+emission_shape = 2
+emission_box_extents = Vector3( 20, 5, 1 )
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 71.87
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 45.68
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = 25.58
+scale = 1.89
+color_ramp = SubResource( 30 )
+
+[sub_resource type="RectangleShape2D" id=32]
+extents = Vector2( 70.6015, 31.6434 )
+
+[sub_resource type="Shader" id=33]
+code = "shader_type canvas_item;
+
+uniform float amplitude = 3f;
+uniform float speed = 1f;
+
+void vertex(){
+	VERTEX.x += amplitude * sin( (1f-UV.y) * speed * TIME);
+}"
+
+[sub_resource type="ShaderMaterial" id=34]
+shader = SubResource( 33 )
+shader_param/amplitude = 3.0
+shader_param/speed = 1.0
+
+[sub_resource type="ConvexPolygonShape2D" id=35]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=36]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=37]
+points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=38]
+points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=39]
+points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=40]
+points = PoolVector2Array( 0, 0, 14.7103, 6.95464, 32, 12.4458, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=41]
+points = PoolVector2Array( 0, 12.3788, 32, 27.91, 32, 32, 0, 32, 0, 21.0861 )
+
+[sub_resource type="ConvexPolygonShape2D" id=42]
+points = PoolVector2Array( 0, 27.0286, 31.7861, 27.0286, 32, 32, 0, 32 )
+
+[sub_resource type="TileSet" id=43]
+0/name = "grasstilemap.png 0"
+0/texture = ExtResource( 9 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 32, 96 )
+0/tile_mode = 2
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 32, 32 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 35 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 2 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 35 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 0, 1 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 36 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+1/name = "waterfallspritesheet.png 1"
+1/texture = ExtResource( 40 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 64, 96, 64 )
+1/tile_mode = 2
+1/autotile/icon_coordinate = Vector2( 0, 0 )
+1/autotile/tile_size = Vector2( 32, 32 )
+1/autotile/spacing = 0
+1/autotile/occluder_map = [  ]
+1/autotile/navpoly_map = [  ]
+1/autotile/priority_map = [  ]
+1/autotile/z_index_map = [  ]
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape = SubResource( 37 )
+1/shape_one_way = false
+1/shape_one_way_margin = 1.0
+1/shapes = [ {
+"autotile_coord": Vector2( 0, 1 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 37 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 1, 1 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 38 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 2, 1 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 39 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 40 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 1, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 41 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 2, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 42 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+1/z_index = 0
+
+[sub_resource type="ShaderMaterial" id=44]
+shader = ExtResource( 29 )
+shader_param/amplitude = 5.0
+shader_param/speed = 2.0
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 8 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 8 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 8 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 8 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 8 )
+region = Rect2( 320, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=51]
+atlas = ExtResource( 8 )
+region = Rect2( 384, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=52]
+atlas = ExtResource( 8 )
+region = Rect2( 448, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 8 )
+region = Rect2( 512, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=54]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ) ],
+"loop": true,
+"name": "New Anim",
+"speed": 30.0
+} ]
+
+[sub_resource type="Animation" id=55]
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.6, 1, 1.9 ),
+"transitions": PoolRealArray( 1, 1.7411, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 19.21, -103 ), Vector2( 19.21, -105 ), Vector2( 19.21, -103 ), Vector2( 73, -110 ), Vector2( 140, -100 ), Vector2( 260, -100 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=56]
+extents = Vector2( 8.2536, 8 )
+
+[sub_resource type="Animation" id=57]
+length = 3.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:zoom:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0.5, -0.25, 0, 0.25, 0, 0.7, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 2 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:zoom:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0.5, -0.25, 0, 0.25, 0, 0.7, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 2 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath(".:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( -179.033, -0.25, 0, 0.25, 0, 65, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 2 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath(".:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -80, -0.25, 0, 0.25, 0, -80, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 2 )
+}
+
+[sub_resource type="RectangleShape2D" id=58]
+extents = Vector2( 10, 72.585 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 14 )
+region = Rect2( 0, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 14 )
+region = Rect2( 64, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 14 )
+region = Rect2( 128, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=62]
+atlas = ExtResource( 14 )
+region = Rect2( 192, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = ExtResource( 14 )
+region = Rect2( 256, 0, 64, 32 )
+
+[sub_resource type="SpriteFrames" id=64]
+animations = [ {
+"frames": [ SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ) ],
+"loop": true,
+"name": "default",
+"speed": 3.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=65]
+extents = Vector2( 33.743, 5.40575 )
+
+[sub_resource type="AtlasTexture" id=66]
+atlas = ExtResource( 43 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 43 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 43 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=69]
+atlas = ExtResource( 43 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=70]
+atlas = ExtResource( 43 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=71]
+animations = [ {
+"frames": [ SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ), SubResource( 70 ) ],
+"loop": true,
+"name": "run",
+"speed": 13.0
+} ]
+
+[sub_resource type="Animation" id=72]
+resource_name = "rat_run"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 278, -47.5 ), Vector2( -150, -47.5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 36 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+offset = Vector2( 0, -130 )
+transform = Transform2D( 1, 0, 0, 1, 0, -130 )
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( -26.9497, 3.5636 )
+texture = ExtResource( 25 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1024, 256 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.95, 1 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+texture = ExtResource( 19 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1024, 256 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.9, 1 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+texture = ExtResource( 11 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1024, 256 )
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
+texture = ExtResource( 13 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1024, 256 )
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer5"]
+texture = ExtResource( 20 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1024, 256 )
+
+[node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 1.2, 1 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer6"]
+texture = ExtResource( 24 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1024, 256 )
+
+[node name="ParallaxLayer9" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 1.2, 1 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer9"]
+position = Vector2( 0, 765.717 )
+scale = Vector2( 1, 5 )
+texture = ExtResource( 24 )
+flip_v = true
+region_enabled = true
+region_rect = Rect2( 0, 0, 1024, 256 )
+
+[node name="ParallaxLayer7" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer7"]
+position = Vector2( 0, 25 )
+texture = ExtResource( 26 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1024, 256 )
+
+[node name="ParallaxLayer8" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer8"]
+position = Vector2( 0, 20 )
+texture = ExtResource( 28 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1024, 256 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="ParallaxBackground"]
+color = Color( 0.219608, 0.219608, 0.219608, 1 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2( 490.084, -35.104 )
+scale = Vector2( 0.6, 0.6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource( 1 )
+
+[node name="background" type="Sprite" parent="."]
+position = Vector2( -110, -105 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 35 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="background"]
+position = Vector2( -130, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="background/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="vegetation" type="Sprite" parent="."]
+material = SubResource( 3 )
+position = Vector2( -40, -43.881 )
+texture = ExtResource( 6 )
+
+[node name="tree_spruce" type="Sprite" parent="."]
+material = SubResource( 4 )
+position = Vector2( 56, -208 )
+texture = ExtResource( 10 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.0352941, 0.0352941, 0.0352941, 1 )
+
+[node name="cave" type="Sprite" parent="."]
+position = Vector2( 321.12, -93.1081 )
+scale = Vector2( 1.52037, 1 )
+texture = ExtResource( 16 )
+
+[node name="Sprite" parent="." instance=ExtResource( 2 )]
+position = Vector2( 48, -48 )
+
+[node name="Light2D" type="Light2D" parent="Sprite"]
+texture = ExtResource( 18 )
+texture_scale = 0.22
+color = Color( 0.858824, 0.572549, 0.168627, 1 )
+shadow_enabled = true
+script = ExtResource( 30 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="twig" type="Sprite" parent="."]
+modulate = Color( 0.635294, 0.635294, 0.635294, 1 )
+material = SubResource( 5 )
+position = Vector2( 18.953, -96 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 27 )
+
+[node name="Stall2" type="Sprite" parent="."]
+position = Vector2( 20, -48 )
+scale = Vector2( 0.7, 1 )
+texture = ExtResource( 21 )
+region_enabled = true
+region_rect = Rect2( -1.756, -4, 32, 32 )
+
+[node name="ManInteract" type="Area2D" parent="Stall2"]
+position = Vector2( 0, -2 )
+scale = Vector2( 1.42857, 1 )
+
+[node name="ManCollision" type="CollisionShape2D" parent="Stall2/ManInteract"]
+position = Vector2( -0.140312, 7.296 )
+shape = SubResource( 6 )
+one_way_collision_margin = 0.5
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Stall2/ManInteract"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stall2/ManInteract/StaticBody2D"]
+position = Vector2( 0.289576, 7.95444 )
+shape = SubResource( 7 )
+one_way_collision = true
+
+[node name="waterfallleft" type="Sprite" parent="."]
+position = Vector2( 405.595, -73.591 )
+rotation = -8.74228e-08
+scale = Vector2( 0.919, 1 )
+texture = ExtResource( 33 )
+
+[node name="Stall" type="Sprite" parent="."]
+position = Vector2( 72.196, -48 )
+scale = Vector2( 0.7, 1 )
+texture = ExtResource( 21 )
+region_enabled = true
+region_rect = Rect2( -1.756, -4, 32, 32 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Stall"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stall/StaticBody2D"]
+position = Vector2( 0.157143, 6.46457 )
+shape = SubResource( 7 )
+disabled = true
+
+[node name="Old woman" type="AnimatedSprite" parent="Stall"]
+position = Vector2( 1.77586, 0.144699 )
+scale = Vector2( 1.42857, 1 )
+frames = SubResource( 12 )
+animation = "owmen"
+frame = 1
+playing = true
+
+[node name="KinematicBody2D2" type="KinematicBody2D" parent="."]
+position = Vector2( -150, -48 )
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 32 )
+canvas_layer_path = NodePath("../CanvasLayer")
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D2"]
+position = Vector2( -6.3, -1.004 )
+scale = Vector2( 1.7, 1.7 )
+frames = SubResource( 21 )
+animation = "idle"
+playing = true
+
+[node name="Sprite" type="Sprite" parent="KinematicBody2D2"]
+visible = false
+position = Vector2( -3.29721, 0.730949 )
+scale = Vector2( 1.7, 1.7 )
+texture = ExtResource( 3 )
+offset = Vector2( -1.12994, -0.347384 )
+region_enabled = true
+region_rect = Rect2( -7.215, 0, 37.281, 37 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D2"]
+position = Vector2( -5.47603, 1.44657 )
+shape = SubResource( 22 )
+
+[node name="Sprite2" parent="KinematicBody2D2" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( -5.7, 4.5 )
+offset = Vector2( 0, -2.623 )
+region_enabled = true
+region_rect = Rect2( -35.207, 2.965, 50, 18.09 )
+
+[node name="Particles2D" parent="KinematicBody2D2/Sprite2" instance=ExtResource( 5 )]
+position = Vector2( 18.5404, -8.71965 )
+scale = Vector2( 0.7, 0.7 )
+amount = 250
+lifetime = 1.3
+local_coords = false
+process_material = SubResource( 25 )
+
+[node name="Light2D3" parent="KinematicBody2D2/Sprite2/Particles2D" instance=ExtResource( 1 )]
+position = Vector2( 0.0342751, -0.11142 )
+scale = Vector2( 0.5, 0.5 )
+texture_scale = 0.3
+mode = 0
+
+[node name="Camera2D" type="Camera2D" parent="KinematicBody2D2"]
+position = Vector2( -3.184, -40 )
+scale = Vector2( 2, 2 )
+current = true
+zoom = Vector2( 0.5, 0.5 )
+limit_left = -234
+limit_smoothed = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+drag_margin_top = 0.12
+drag_margin_bottom = 0.0
+
+[node name="foreground" type="Sprite" parent="."]
+material = SubResource( 26 )
+position = Vector2( -110, -105.382 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 23 )
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 390.357, -127.585 )
+scale = Vector2( -1, 1 )
+
+[node name="waterfallright" type="Sprite" parent="Node2D"]
+position = Vector2( -15.238, 53.994 )
+rotation = -3.14159
+scale = Vector2( 1, -1 )
+texture = ExtResource( 34 )
+
+[node name="Waterfall" type="Particles2D" parent="Node2D"]
+position = Vector2( 0, 10.953 )
+amount = 1000
+lifetime = 1.46
+process_material = ExtResource( 22 )
+
+[node name="Water" type="Sprite" parent="Node2D"]
+material = SubResource( 28 )
+position = Vector2( 19.9109, 123.931 )
+scale = Vector2( 1.87013, 0.5 )
+texture = ExtResource( 31 )
+
+[node name="waterfallright-export" type="Sprite" parent="Node2D"]
+position = Vector2( -15.6324, 53.8305 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+texture = ExtResource( 41 )
+
+[node name="WaterSplash" type="Particles2D" parent="Node2D"]
+position = Vector2( 22.893, 111.081 )
+amount = 500
+lifetime = 0.54
+process_material = SubResource( 31 )
+
+[node name="WaterfallLight" type="Light2D" parent="Node2D"]
+visible = false
+position = Vector2( 21.2087, 92.6856 )
+texture = ExtResource( 18 )
+texture_scale = 0.34
+energy = 0.77
+
+[node name="WaterfallCollision" type="Area2D" parent="Node2D"]
+position = Vector2( -35.02, 51.011 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/WaterfallCollision"]
+position = Vector2( 14.2301, 22.7651 )
+shape = SubResource( 32 )
+
+[node name="shrub" type="Sprite" parent="."]
+material = SubResource( 34 )
+position = Vector2( 134.016, -31.7703 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 12 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource( 43 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+tile_data = PoolIntArray( -65540, 0, 0, -65539, 0, 0, -65538, 0, 0, -65537, 0, 0, -131072, 0, 0, -131070, 0, 0, -131069, 0, 0, -131068, 0, 0, -131067, 0, 0, -131066, 0, 0, -131065, 0, 0, -131064, 0, 0, -7, 0, 65536, -6, 0, 65536, -5, 0, 65536, -4, 0, 65536, -3, 0, 65536, -2, 0, 65536, -1, 0, 65536, -65536, 0, 65536, -65535, 0, 65536, -65534, 0, 65536, -65533, 0, 65536, -65532, 0, 65536, -65531, 0, 65536, -65530, 0, 65536, -65529, 0, 65536, -65528, 0, 65536, -65527, 1, 0, -65526, 1, 1, -65525, 1, 2, -65524, 1, 2, -65523, 1, 2, 65529, 0, 131072, 65530, 0, 131072, 65531, 0, 131072, 65532, 0, 131072, 65533, 0, 131072, 65534, 0, 131072, 65535, 0, 131072, 0, 0, 131072, 1, 0, 131072, 2, 0, 131072, 3, 0, 131072, 4, 0, 131072, 5, 0, 131072, 6, 0, 131072, 7, 0, 131072, 8, 0, 131072, 9, 0, 131072, 10, 0, 131072, 11, 0, 131072, 12, 0, 131072, 13, 0, 131072, 14, 0, 131072 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 44 )
+position = Vector2( 19.21, -103 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 54 )
+animation = "New Anim"
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite"]
+anims/Move = SubResource( 55 )
+
+[node name="Owl" type="Area2D" parent="AnimatedSprite"]
+position = Vector2( -2, -4 )
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite/Owl"]
+shape = SubResource( 56 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( -179.033, -80 )
+zoom = Vector2( 0.5, 0.5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D"]
+anims/camera_beginning = SubResource( 57 )
+
+[node name="StopWalking" type="StaticBody2D" parent="."]
+position = Vector2( -6.313, -60.699 )
+scale = Vector2( 0.6, 0.6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StopWalking"]
+position = Vector2( 72.0833, -25.4167 )
+shape = SubResource( 58 )
+
+[node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
+position = Vector2( 50, -64.82 )
+scale = Vector2( 0.6, 0.6 )
+frames = SubResource( 64 )
+frame = 1
+speed_scale = 0.702
+playing = true
+
+[node name="actualforeground" type="Sprite" parent="."]
+position = Vector2( -204.945, -95.1287 )
+texture = ExtResource( 39 )
+
+[node name="LevelTransition" type="Area2D" parent="."]
+position = Vector2( 448.552, -15.097 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTransition"]
+shape = SubResource( 65 )
+
+[node name="SceneTransition" type="ColorRect" parent="LevelTransition"]
+modulate = Color( 0, 0, 0, 0 )
+margin_left = -209.0
+margin_top = -144.0
+margin_right = 204.0
+margin_bottom = 161.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SceneAnim" type="AnimationPlayer" parent="LevelTransition/SceneTransition"]
+anims/scenesFade = ExtResource( 42 )
+
+[node name="Rat" type="AnimatedSprite" parent="."]
+position = Vector2( -150, -47.5 )
+frames = SubResource( 71 )
+animation = "run"
+frame = 2
+playing = true
+
+[node name="RatAnim" type="AnimationPlayer" parent="Rat"]
+anims/rat_run = SubResource( 72 )
+
+[connection signal="body_entered" from="Stall2/ManInteract" to="KinematicBody2D2" method="_on_ManInteract_body_entered"]
+[connection signal="body_exited" from="Stall2/ManInteract" to="KinematicBody2D2" method="_on_ManInteract_body_exited"]
+[connection signal="body_entered" from="Node2D/WaterfallCollision" to="KinematicBody2D2" method="_on_WaterfallCollision_body_entered"]
+[connection signal="body_exited" from="Node2D/WaterfallCollision" to="KinematicBody2D2" method="_on_WaterfallCollision_body_exited"]
+[connection signal="animation_finished" from="AnimatedSprite/AnimationPlayer" to="KinematicBody2D2" method="_on_AnimationPlayer_animation_finished"]
+[connection signal="body_entered" from="AnimatedSprite/Owl" to="KinematicBody2D2" method="_on_Owl_body_entered"]
+[connection signal="body_entered" from="LevelTransition" to="KinematicBody2D2" method="_on_LevelTransition_body_entered"]
+[connection signal="animation_finished" from="LevelTransition/SceneTransition/SceneAnim" to="KinematicBody2D2" method="_on_SceneAnim_animation_finished"]
+[connection signal="animation_finished" from="Rat/RatAnim" to="KinematicBody2D2" method="_on_RatAnim_animation_finished"]
